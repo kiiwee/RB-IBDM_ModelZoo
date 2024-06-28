@@ -25,10 +25,6 @@ jobs:
             image: ghcr.io/kiiwee/rb-ibdm-gradio-yolo
             context: ./gradio-yolo
 
-          - dockerfile: ./gradio-yolo/Dockerfile.gpu
-            image: ghcr.io/kiiwee/rb-ibdm-gradio-yolo-gpu
-            context: ./gradio-yolo
-
           - dockerfile: ./gradio-fulldemo/Dockerfile
             image: ghcr.io/kiiwee/rb-ibdm-gradio-full-demo
             context: ./gradio-fulldemo
@@ -77,7 +73,7 @@ jobs:
         with:
           context: ${{ matrix.context }}
 
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
 
           file: ${{ matrix.dockerfile }}
           push: true
