@@ -1,21 +1,19 @@
+import matplotlib.pyplot as plt
+from detectron2.utils.visualizer import Visualizer, ColorMode
+from detectron2.data import MetadataCatalog
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
 import torch
 import numpy as np
 import cv2
 from huggingface_hub import hf_hub_download
 
-REPO_ID = "kiiwee/Detectron2_FasterRCNN_InsectDetect"
+REPO_ID = "kalinkov/Detectron2_FasterRCNN_R50_FPN_InsectDetection"
 FILENAME = "model.pth"
-FILENAME_CONFIG = "config.yml"
+FILENAME_CONFIG = "config.yaml"
 
 
 # Ensure you have the model file
-
-import cv2
-from detectron2.config import get_cfg
-from detectron2.engine import DefaultPredictor
-from detectron2.data import MetadataCatalog
-from detectron2.utils.visualizer import Visualizer, ColorMode
-import matplotlib.pyplot as plt
 
 
 viz_classes = {'thing_classes': ['Acrididae',
@@ -103,22 +101,20 @@ viz_classes = {'thing_classes': ['Acrididae',
                                  'Yponomeutidae']}
 
 
-
 def detectron_process_image(image):
     cfg = get_cfg()
 
-
-    cfg.merge_from_file(hf_hub_download(repo_id=REPO_ID, filename=FILENAME_CONFIG))
+    cfg.merge_from_file(hf_hub_download(
+        repo_id=REPO_ID, filename=FILENAME_CONFIG))
     cfg.MODEL.WEIGHTS = hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.2
-    cfg.MODEL.DEVICE='cpu'
+    cfg.MODEL.DEVICE = 'cpu'
     predictor = DefaultPredictor(cfg)
 
     numpy_image = np.array(image)
 
-
     im = cv2.cvtColor(numpy_image, cv2.COLOR_RGB2BGR)
-    
+
     v = Visualizer(im[:, :, ::-1],
                    viz_classes,
                    scale=0.5)

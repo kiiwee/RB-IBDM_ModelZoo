@@ -3,9 +3,9 @@ import numpy as np
 import cv2
 from huggingface_hub import hf_hub_download
 
-REPO_ID = "kiiwee/Detectron2_FasterRCNN_InsectDetect"
+REPO_ID = "kalinkov/Detectron2_FasterRCNN_R50_FPN_InsectDetection"
 FILENAME = "model.pth"
-FILENAME_CONFIG = "config.yml"
+FILENAME_CONFIG = "config.yaml"
 
 
 # Ensure you have the model file
