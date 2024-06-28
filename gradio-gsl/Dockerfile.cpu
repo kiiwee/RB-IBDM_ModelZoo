@@ -5,19 +5,19 @@ COPY . .
 # INSTALL GSAM
 RUN git clone https://github.com/IDEA-Research/Grounded-Segment-Anything
 WORKDIR  /usr/src/app/Grounded-Segment-Anything
-RUN pip install  -r requirements.txt
+RUN pip install -q  -r requirements.txt
 WORKDIR /usr/src/app/Grounded-Segment-Anything/GroundingDINO
-RUN pip install  .
+RUN pip install -q .
 WORKDIR /usr/src/app/Grounded-Segment-Anything/segment_anything
-RUN pip install  .
+RUN pip install -q .
 WORKDIR /usr/src/app
 RUN apt-get update && apt-get install -y python3-opencv
 RUN pip install opencv-python
 
-RUN pip install torch torchvision
+RUN pip install -q torch torchvision
 
 WORKDIR /usr/src/app
-RUN pip install  -r requirements.txt
+RUN pip install -q -r requirements.txt
 RUN wget -q https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
 
 EXPOSE 7860
