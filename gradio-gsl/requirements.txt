@@ -1,0 +1,9 @@
+gradio==4.29.0
+transformers
+opencv-python-headless
+Pillow
+numpy
+requests
+matplotlib
+simple-lama-inpainting
+ipython
