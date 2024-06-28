@@ -16,9 +16,10 @@ RUN pip install opencv-python
 
 RUN pip install torch torchvision
 
-RUN cd /usr/src/app
+WORKDIR /usr/src/app
 RUN pip install  -r requirements.txt
 RUN wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+
 EXPOSE 7860
 ENV GRADIO_SERVER_NAME="0.0.0.0"
 
